@@ -1,0 +1,22 @@
+# Create .gitignore at the root of todoApp
+cat > .gitignore << 'EOF'
+# Dependencies
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Environment variables
+.env
+backend/.env
+frontend/.env
+
+# Build files
+build/
+dist/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+EOF
