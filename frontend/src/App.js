@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const API = `${import.meta.env.VITE_API_URL || "http://localhost:8000"}/todos`;
+const API = `${process.env.REACT_APP_API_URL || "http://localhost:8000"}/todos`;
 
 function App() {
   const [todos, setTodos] = useState([]);
