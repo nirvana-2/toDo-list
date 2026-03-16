@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:3000", /\.vercel\.app$/],
+  origin: ["http://localhost:5173", "http://localhost:3001", /\.vercel\.app$/],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true
 }));
