@@ -1,22 +1,29 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 const todoRoutes = require("./routes/todoRoutes");
 
-const app = express();
-const PORT = 8000;
+dotenv.config();
 
-app.use(cors());
+const app = express();
+const PORT = process.env.PORT || 8000;
+
+app.use(cors({
+  origin: ["http://localhost:5173", "http://localhost:3000", /\.vercel\.app$/],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true
+}));
 app.use(express.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/todoDB")
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
   .catch(err => console.log("❌ DB Connection Error:", err));
 
 app.use("/todos", todoRoutes);
 
 app.get("/", (req, res) => {
-  res.send("✅ Server is running! Use /todos endpoint.");
+  res.send("✅ Server is running!");
 });
 
-app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
+app.listen(PORT, "0.0.0.0", () => console.log(`🚀 Server running on port ${PORT}`));
